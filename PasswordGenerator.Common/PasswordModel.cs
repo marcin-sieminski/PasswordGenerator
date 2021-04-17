@@ -5,15 +5,20 @@ namespace PasswordGenerator.Common
 {
     public class PasswordModel
     {
-        public string Password { get; private set; }
-        public bool CanContainUppercase { get; set; } = true;
-        public bool CanContainLowercase { get; set; } = true;
-        public bool CanContainNumbers { get; set; } = true;
-        public bool CanContainSpecialCharacters { get; set; } = true;
-        public int PasswordLength { get; set; } = 10;
+        public string Password { get; set; }
+        public bool CanContainUppercase { get; set; }
+        public bool CanContainLowercase { get; set; }
+        public bool CanContainNumbers { get; set; }
+        public bool CanContainSpecialCharacters { get; set; }
+        public int PasswordLength { get; set; }
 
         public void GeneratePassword()
         {
+            if (PasswordLength < 1)
+            {
+                return;
+            }
+
             var newPasswordChars = new char[PasswordLength];
 
             const int minAsciiCode = 33;

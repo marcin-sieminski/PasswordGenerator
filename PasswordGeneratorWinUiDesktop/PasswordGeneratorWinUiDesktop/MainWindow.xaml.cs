@@ -1,5 +1,4 @@
 ﻿using Microsoft.UI.Xaml;
-using PasswordGenerator.Common;
 using PasswordGenerator.ViewModel;
 
 
@@ -10,7 +9,7 @@ namespace PasswordGeneratorWinUiDesktop
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new PasswordViewModel(new PasswordModel());
+            ViewModel = new PasswordViewModel();
         }
 
         public PasswordViewModel ViewModel { get; }

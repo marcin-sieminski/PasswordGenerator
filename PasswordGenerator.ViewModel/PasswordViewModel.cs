@@ -1,49 +1,88 @@
 ﻿using PasswordGenerator.Common;
-using System.Windows.Input;
 
 namespace PasswordGenerator.ViewModel
 {
     public class PasswordViewModel : ViewModelBase
     {
-        private readonly PasswordModel _password;
-        public string Password => _password.Password;
-        public bool CanContainUppercase 
-        { 
-            get => _password.CanContainUppercase;
-            set => _password.CanContainUppercase = value;
-        }
-        //public bool CanContainLowercase { get; set; } = true;
-        //public bool CanContainNumbers { get; set; } = true;
-        //public bool CanContainSpecialCharacters { get; set; } = true;
-        public int PasswordLength { get => _password.PasswordLength; set => _password.PasswordLength = value; }
-
-        public PasswordViewModel(PasswordModel password)
+        private readonly PasswordModel _model = new()
         {
-            _password = password;
-        }
+            PasswordLength = 25,
+            CanContainUppercase = true,
+            CanContainLowercase = true,
+            CanContainNumbers = true,
+            CanContainSpecialCharacters = true
+        };
 
-
-        public void Load()
+        public string Password
         {
-            _password.GeneratePassword();
-        }
-
-        private ICommand generatePasswordCommand;
-
-        public ICommand GeneratePassword
-        {
-            get
+            get => _model.Password;
+            set
             {
-                if (generatePasswordCommand == null)
-                {
-                    //generatePasswordCommand = new RelayCommand((object agument) =>
-                    //{
-
-                    //});
-                }
-                return generatePasswordCommand;
+                _model.Password = value;
+                OnPropertyChanged(nameof(Password));
             }
         }
-    }
 
+        public int PasswordLength
+        {
+            get => _model.PasswordLength;
+            set
+            {
+                _model.PasswordLength = value;
+                OnPropertyChanged(nameof(PasswordLength));
+            }
+        }
+
+        public bool CanContainUppercase
+        {
+            get => _model.CanContainUppercase;
+            set
+            {
+                _model.CanContainUppercase = value;
+                OnPropertyChanged(nameof(CanContainUppercase));
+            }
+        }
+
+        public bool CanContainLowercase
+        {
+            get => _model.CanContainLowercase;
+            set
+            {
+                _model.CanContainLowercase = value;
+                OnPropertyChanged(nameof(CanContainLowercase));
+            }
+        }
+
+        public bool CanContainNumbers
+        {
+            get => _model.CanContainNumbers;
+            set
+            {
+                _model.CanContainNumbers = value;
+                OnPropertyChanged(nameof(CanContainNumbers));
+            }
+        }
+
+        public bool CanContainSpecialCharacters
+        {
+            get => _model.CanContainSpecialCharacters;
+            set
+            {
+                _model.CanContainSpecialCharacters = value;
+                OnPropertyChanged(nameof(CanContainSpecialCharacters));
+            }
+        }
+
+        public void Generate()
+        {
+            _model.GeneratePassword();
+            OnPropertyChanged(nameof(Password));
+        }
+
+        public void Clear()
+        {
+            _model.Password = string.Empty;
+            OnPropertyChanged(nameof(Password));
+        }
+    }
 }
