@@ -36,7 +36,17 @@
             <CheckBox Grid.Row="1" IsChecked="{x:Bind ViewModel.CanContainLowercase, Mode=TwoWay}" Content="Lowercase" Margin="10"></CheckBox>
             <CheckBox Grid.Row="2"  IsChecked="{x:Bind ViewModel.CanContainNumbers, Mode=TwoWay}" Content="Numbers" Margin="10"></CheckBox>
             <CheckBox Grid.Row="3" IsChecked="{x:Bind ViewModel.CanContainSpecialCharacters, Mode=TwoWay}" Content="Symbols" Margin="10"></CheckBox>
-            <TextBlock Grid.Row="4" Margin="10" Text="Password length"></TextBlock>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Margin="10" Text="Password length: "></TextBlock>
+                <TextBlock Grid.Column="1" Margin="10" Text="{x:Bind ViewModel.PasswordLength, Mode=OneWay}" TextAlignment="Center"></TextBlock>
+            </Grid>
+            
             <Slider Grid.Row="5" Margin="10" Minimum="1" Maximum="100" Value="{x:Bind ViewModel.PasswordLength, Mode=TwoWay}"></Slider>
         </Grid>
 
